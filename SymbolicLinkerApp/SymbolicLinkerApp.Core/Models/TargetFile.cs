@@ -12,7 +12,9 @@ namespace SymbolicLinkerApp.Core.Models
     public class TargetFile
     {
         public string Name { get; set; }
-        public FileProcessState State { get; set; }
+        public FileProcessState State { get; set; } = FileProcessState.Wait;
         public string ErrorMessage { get; set; } = string.Empty;
+
+        public bool IsSelected { get; set; } = false;
     }
 }

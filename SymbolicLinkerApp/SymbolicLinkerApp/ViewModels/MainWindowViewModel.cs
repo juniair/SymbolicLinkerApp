@@ -4,7 +4,7 @@ namespace SymbolicLinkerApp.ViewModels
 {
     public class MainWindowViewModel : BindableBase
     {
-        private string _title = "Prism Application";
+        private string _title = "Symbolic Linker";
         public string Title
         {
             get { return _title; }

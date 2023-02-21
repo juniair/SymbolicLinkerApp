@@ -22,19 +22,50 @@ namespace SymbolicLinkerApp.Modules.FileList.ViewModels
             set { SetProperty(ref _message, value); }
         }
 
-        public ObservableCollection<TargetFile> targetFiles { get; set; } = new ObservableCollection<TargetFile>();
+        public ObservableCollection<TargetFile> TargetFiles { get; set; } = new ObservableCollection<TargetFile>();
 
-        public DelegateCommand AddedCommand { get; set; }
+        public DelegateCommand AddCommand { get; private set; }
+        public DelegateCommand RemoveCommand { get; private set; }
+
+        public DelegateCommand<object[]> SelectedCommand { get; private set; }
 
         public FileListViewModel(IRegionManager regionManager, IMessageService messageService) :
             base(regionManager)
         {
             Message = messageService.GetMessage();
+            TargetFiles.Add(new TargetFile { Name = "1" });
+            TargetFiles.Add(new TargetFile { Name = "2" });
+            TargetFiles.Add(new TargetFile { Name = "3" });
+            TargetFiles.Add(new TargetFile { Name = "4" });
+
+            AddCommand = new DelegateCommand(AddFileOrDirectory);
+
+            RemoveCommand = new DelegateCommand(RemoveFileOrDirectory)
+
+            SelectedCommand = new DelegateCommand<object[]>(OnItemSelected);
         }
 
         public override void OnNavigatedTo(NavigationContext navigationContext)
         {
             //do something
+        }
+
+        private void OnItemSelected(object[] selectedItems)
+        {
+            if (selectedItems != null && selectedItems.Count() > 0)
+            {
+                string SelectedItemText = selectedItems.FirstOrDefault().ToString();
+            }
+        }
+
+        private void AddFileOrDirectory()
+        {
+
+        }
+
+        private void RemoveFileOrDirectory()
+        {
+
         }
     }
 }
